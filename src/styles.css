@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.primary-input {
+  @apply text-gray-50 bg-transparent text-sm w-full border border-midnight-700 focus:border-blue-500 focus:outline-none py-2 pl-2 pr-10 rounded-[10px];
+}
+
+.primary-button {
+  @apply flex justify-center text-sm text-gray-50 p-2 w-full disabled:opacity-70 hover:enabled:bg-blue-600 bg-blue-500 border-blue-500 hover:enabled:border-blue-600 border rounded-[10px];
+}
+
+.secondary-button {
+  @apply flex justify-center text-sm text-gray-50 p-2 w-full hover:bg-midnight-600 border-midnight-600 border rounded-[10px];
+}
+
+.input-alert--invalid {
+  @apply bg-[url('assets/img/icons/invalid.svg')] border border-solid border-flame-500 focus:border-flame-300 bg-error-icon-pos bg-no-repeat bg-error-icon-size;
+}
