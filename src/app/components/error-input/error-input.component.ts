@@ -12,7 +12,7 @@ import {NgClass, NgIf} from '@angular/common';
   selector: 'app-error-input',
   standalone: true,
   imports: [ReactiveFormsModule, NgClass, NgIf],
-  template: `<div class="bg-midnight-800">
+  template: `
     <input [type]="type"
            [placeholder]="placeholder"
            [value]="value"
@@ -22,16 +22,15 @@ import {NgClass, NgIf} from '@angular/common';
            [formGroup]="formGroup"
            [ngClass]="formControl.invalid && formControl.dirty ? 'input-alert--invalid' : ''"
            class="primary-input">
-  </div>
-  @if (formControl.invalid && formControl.dirty) {
-    <ul class="flex flex-col gap-1 text-flame-500 text-sm py-1">
-      @for (error of controlErrorMessages; track $index) {
-        <li *ngIf="formControl.hasError(error.type)">
-          {{ error.message }}
-        </li>
-      }
-    </ul>
-  }`,
+    @if (formControl.invalid && formControl.dirty) {
+      <ul class="flex flex-col gap-1 text-flame-500 text-sm py-1">
+        @for (error of controlErrorMessages; track $index) {
+          <li *ngIf="formControl.hasError(error.type)">
+            {{ error.message }}
+          </li>
+        }
+      </ul>
+    }`,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

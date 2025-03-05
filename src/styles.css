@@ -2,18 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-box-shadow: 0 0 0 30px rgb(15 30 46) inset !important;
+  -webkit-text-fill-color: rgb(249 250 251) !important;
+}
+
 .primary-input {
-  @apply text-gray-50 bg-transparent text-sm w-full border border-midnight-700 focus:border-blue-500 focus:outline-none py-2 pl-2 pr-10 rounded-[10px];
+  @apply text-gray-50 bg-midnight-800 text-sm w-full border border-midnight-600 hover:border-blue-500
+  focus:border-blue-500 focus:outline-none py-2 pl-2 pr-10 rounded-[10px] transition-all ease-in-out;
+
+  &.input-alert--invalid {
+    @apply bg-[url('assets/img/icons/invalid.svg')] border border-solid border-flame-500 hover:border-flame-300
+    focus:border-flame-300 bg-error-icon-pos bg-no-repeat bg-error-icon-size transition-all ease-in-out;
+  }
 }
 
 .primary-button {
-  @apply flex justify-center text-sm text-gray-50 p-2 w-full disabled:opacity-70 hover:enabled:bg-blue-600 bg-blue-500 border-blue-500 hover:enabled:border-blue-600 border rounded-[10px];
+  @apply flex justify-center text-sm text-gray-50 p-2 w-full disabled:opacity-70 hover:enabled:bg-blue-600 bg-blue-500
+  border-blue-500 hover:enabled:border-blue-600 border rounded-[10px] transition-all ease-in-out;
 }
 
 .secondary-button {
-  @apply flex justify-center text-sm text-gray-50 p-2 w-full hover:bg-midnight-600 border-midnight-600 border rounded-[10px];
-}
-
-.input-alert--invalid {
-  @apply bg-[url('assets/img/icons/invalid.svg')] border border-solid border-flame-500 focus:border-flame-300 bg-error-icon-pos bg-no-repeat bg-error-icon-size;
+  @apply flex justify-center text-sm text-gray-50 p-2 w-full hover:bg-midnight-600 border-midnight-600 border
+  rounded-[10px] transition-all ease-in-out;
 }

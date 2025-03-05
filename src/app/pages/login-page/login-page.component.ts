@@ -1,11 +1,18 @@
-import { Component, inject } from '@angular/core';
-import { ApiClient, LoginEmailConfirmRequest, LoginEmailRequest } from '../../../api/api-client';
+import {Component, inject, signal} from '@angular/core';
+import {
+  ApiClient,
+  ApiException,
+  LoginEmailConfirmRequest,
+  LoginEmailRequest
+} from '../../../api/api-client';
 import { Router, RouterLink } from '@angular/router';
 import { AuthorizationService } from '../../services/authorization.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoadingComponent } from '../../components/loading/loading.component';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { matErrorOutline, matArrowBack } from "@ng-icons/material-icons/baseline";
+import { NgIf } from '@angular/common';
+import { AuthErrorAlertComponent } from '../../components/error-alert/auth-error-alert.component';
 
 @Component({
   selector: 'app-login-page',
@@ -14,7 +21,9 @@ import { matErrorOutline, matArrowBack } from "@ng-icons/material-icons/baseline
     LoadingComponent,
     ReactiveFormsModule,
     RouterLink,
-    NgIcon
+    NgIcon,
+    NgIf,
+    AuthErrorAlertComponent
   ],
   templateUrl: './login-page.component.html',
   viewProviders: [provideIcons({ matErrorOutline, matArrowBack })]
@@ -24,8 +33,9 @@ export class LoginPageComponent {
 
   steps: "sendCode" | "confirmCode" = "sendCode";
   loading = false;
-  hasError = false;
   codeLength = 6;
+
+  error = signal<ApiException | null>(null);
 
   apiClient = inject(ApiClient);
   router = inject(Router);
@@ -50,15 +60,13 @@ export class LoginPageComponent {
   backToSendCode(){
     this.confirmCodeForm.reset();
     this.sendCodeForm.enable();
+    this.error.set(null);
     this.loading = false;
-    this.hasError = false;
     this.steps = "sendCode";
   }
 
-  async sendCode() {
+  sendCode() {
     this.loading = true;
-    this.hasError = false;
-
     this.sendCodeForm.disable();
     this.apiClient
       .email(new LoginEmailRequest({
@@ -69,17 +77,19 @@ export class LoginPageComponent {
           this.loading = false;
           this.steps = "confirmCode";
         },
-        error: () => {
-          this.hasError = true;
+        error: (err) => {
+          this.error.set(err);
           this.loading = false;
           this.sendCodeForm.enable();
+        },
+        complete: () => {
+          this.error.set(null);
         }
       });
   }
 
   confirmCode() {
     this.loading = true;
-    this.hasError = false;
     this.confirmCodeForm.disable();
     this.apiClient
       .confirm(new LoginEmailConfirmRequest({
@@ -89,12 +99,15 @@ export class LoginPageComponent {
       .subscribe({
         next: result => {
           this.authService.setNewPayLoad(result);
-          this.router.navigate([""]).then();
+          this.router.navigate(["/"]).then();
         },
-        error: () => {
-          this.hasError = true;
+        error: (err) => {
+          this.error.set(err);
           this.loading = false;
           this.confirmCodeForm.enable();
+        },
+        complete: () => {
+          this.error.set(null);
         }
       });
   }

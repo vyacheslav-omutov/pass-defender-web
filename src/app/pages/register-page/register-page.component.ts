@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -7,12 +7,12 @@ import {
   Validators
 } from '@angular/forms';
 import { LoadingComponent } from '../../components/loading/loading.component';
-import { ApiClient, RegisterRequest } from '../../../api/api-client';
+import { ApiClient, ApiException, RegisterRequest } from '../../../api/api-client';
 import { Router, RouterLink } from '@angular/router';
 import { errorMessages } from '../../data/error-messages.data';
 import { ErrorInputComponent } from '../../components/error-input/error-input.component';
-import { NgIcon, provideIcons } from '@ng-icons/core';
-import { matErrorOutline } from "@ng-icons/material-icons/baseline";
+import { AuthErrorAlertComponent } from '../../components/error-alert/auth-error-alert.component';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-register-page',
@@ -23,32 +23,38 @@ import { matErrorOutline } from "@ng-icons/material-icons/baseline";
     ReactiveFormsModule,
     RouterLink,
     ErrorInputComponent,
-    NgIcon
+    AuthErrorAlertComponent,
+    NgIf
   ],
-  templateUrl: './register-page.component.html',
-  viewProviders: [provideIcons({ matErrorOutline })]
+  templateUrl: './register-page.component.html'
 })
 export class RegisterPageComponent {
   loading = false;
-  hasError = false;
+
+  private readonly usernamePattern = "^[a-zA-Z0-9](?:[a-zA-Z0-9_-]*[a-zA-Z0-9])?$";
+
+  error = signal<ApiException | null>(null);
 
   apiClient = inject(ApiClient);
   router = inject(Router);
 
-  // TODO: Add the correct check for the "Username" property
   registerForm = new FormGroup({
     username: new FormControl("", [
       Validators.required,
-      Validators.minLength(6)]),
+      Validators.minLength(6),
+      Validators.maxLength(20),
+      Validators.pattern(this.usernamePattern)]),
     email: new FormControl<string>("", [
       Validators.required,
       Validators.minLength(6),
-      Validators.maxLength(254)
+      Validators.maxLength(254),
+      Validators.email
     ]),
   });
 
   register() {
     this.loading = true;
+    this.error.set(null);
     this.registerForm.disable();
     this.apiClient
       .register(new RegisterRequest({
@@ -59,8 +65,8 @@ export class RegisterPageComponent {
         next: () => {
           this.router.navigate(["/login"]).then();
         },
-        error: () => {
-          this.hasError = true;
+        error: (err) => {
+          this.error.set(err);
           this.loading = false;
           this.registerForm.enable();
         }
