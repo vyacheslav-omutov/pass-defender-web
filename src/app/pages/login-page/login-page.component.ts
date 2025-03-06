@@ -14,6 +14,7 @@ import { matErrorOutline, matArrowBack } from "@ng-icons/material-icons/baseline
 import { NgIf } from '@angular/common';
 import { AuthErrorAlertComponent } from '../../components/error-alert/auth-error-alert.component';
 import { NumberRestrictDirective } from '../../directives/number-restrict.directive';
+import { PreviousRouteService } from '../../services/previous-route.service';
 
 @Component({
   selector: 'app-login-page',
@@ -31,8 +32,6 @@ import { NumberRestrictDirective } from '../../directives/number-restrict.direct
   viewProviders: [provideIcons({ matErrorOutline, matArrowBack })]
 })
 export class LoginPageComponent {
-  codeValue: string = '';
-
   steps: "sendCode" | "confirmCode" = "sendCode";
   loading = false;
   codeLength = 6;
@@ -42,6 +41,7 @@ export class LoginPageComponent {
   apiClient = inject(ApiClient);
   router = inject(Router);
   authService = inject(AuthorizationService);
+  previousRouteService = inject(PreviousRouteService);
 
   sendCodeForm = new FormGroup({
     email: new FormControl<string>("", [
@@ -101,7 +101,8 @@ export class LoginPageComponent {
       .subscribe({
         next: result => {
           this.authService.setNewPayLoad(result);
-          this.router.navigate(["/"]).then();
+          let url = this.previousRouteService.getPreviousUrl();
+          this.router.navigateByUrl(url).then();
         },
         error: (err) => {
           this.error.set(err);

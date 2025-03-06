@@ -51,8 +51,8 @@
                       (ngSubmit)="confirmCode()"
                       class="flex flex-col gap-3">
                   <div class="flex justify-center">
-                    <div class="w-3/4 p-3">
-                      <img class="w-full h-full" src="assets/img/icons/logo.svg" alt="logo"/>
+                    <div class="sm:w-3/4 w-[200px] p-2">
+                      <img alt="logo" src="assets/img/icons/logo.svg"/>
                     </div>
                   </div>
                   <span class="text-gray-300 text-base text-center font-bold">
@@ -60,7 +60,6 @@
                   </span>
                   <input [formControl]="confirmCodeForm.controls.code"
                          [maxLength]="codeLength"
-                         [value]="codeValue"
                          appNumberRestrict
                          class="primary-input"
                          placeholder="Code">
