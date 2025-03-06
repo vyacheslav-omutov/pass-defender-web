@@ -22,12 +22,10 @@
                   <span class="text-gray-300 text-base text-center font-bold">
                     Log in to PassDefender
                   </span>
-                  <div>
-                    <div class="bg-midnight-800">
-                      <input [formControl]="sendCodeForm.controls.email"
-                             class="primary-input" type="email" placeholder="Email">
-                    </div>
-                  </div>
+                  <input [formControl]="sendCodeForm.controls.email"
+                         class="primary-input"
+                         type="email"
+                         placeholder="Email">
                   <ng-container *ngIf="error() as apiException">
                     <app-error-alert [exception]="apiException"/>
                   </ng-container>
@@ -60,16 +58,12 @@
                   <span class="text-gray-300 text-base text-center font-bold">
                     Log in to PassDefender
                   </span>
-                  <div>
-                    <div class="bg-midnight-800">
-                      <input [formControl]="confirmCodeForm.controls.code"
-                             [maxLength]="codeLength"
-                             [value]="codeValue"
-                             (input)="onCodeInput($event)"
-                             class="primary-input"
-                             placeholder="Code">
-                    </div>
-                  </div>
+                  <input [formControl]="confirmCodeForm.controls.code"
+                         [maxLength]="codeLength"
+                         [value]="codeValue"
+                         appNumberRestrict
+                         class="primary-input"
+                         placeholder="Code">
                   <ng-container *ngIf="error() as apiException">
                     <app-error-alert [exception]="apiException"/>
                   </ng-container>

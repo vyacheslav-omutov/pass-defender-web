@@ -13,6 +13,7 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { matErrorOutline, matArrowBack } from "@ng-icons/material-icons/baseline";
 import { NgIf } from '@angular/common';
 import { AuthErrorAlertComponent } from '../../components/error-alert/auth-error-alert.component';
+import { NumberRestrictDirective } from '../../directives/number-restrict.directive';
 
 @Component({
   selector: 'app-login-page',
@@ -23,7 +24,8 @@ import { AuthErrorAlertComponent } from '../../components/error-alert/auth-error
     RouterLink,
     NgIcon,
     NgIf,
-    AuthErrorAlertComponent
+    AuthErrorAlertComponent,
+    NumberRestrictDirective
   ],
   templateUrl: './login-page.component.html',
   viewProviders: [provideIcons({ matErrorOutline, matArrowBack })]
@@ -110,12 +112,5 @@ export class LoginPageComponent {
           this.error.set(null);
         }
       });
-  }
-
-  onCodeInput(event: Event) {
-    const input = event.target as HTMLInputElement;
-    const numericValue = input.value.replace(/[^0-9]/g, '');
-    this.codeValue = numericValue;
-    input.value = numericValue;
   }
 }

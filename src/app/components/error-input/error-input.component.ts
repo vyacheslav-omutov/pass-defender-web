@@ -20,7 +20,7 @@ import {NgClass, NgIf} from '@angular/common';
            (blur)="onTouched()"
            [formControl]="formControl"
            [formGroup]="formGroup"
-           [ngClass]="formControl.invalid && formControl.dirty ? 'input-alert--invalid' : ''"
+           [ngClass]="formControl.invalid && formControl.dirty ? 'is-invalid' : ''"
            class="primary-input">
     @if (formControl.invalid && formControl.dirty) {
       <ul class="flex flex-col gap-1 text-flame-500 text-sm py-1">

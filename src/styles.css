@@ -10,11 +10,11 @@ input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:act
 
 .primary-input {
   @apply text-gray-50 bg-midnight-800 text-sm w-full border border-midnight-600 hover:border-blue-500
-  focus:border-blue-500 focus:outline-none py-2 pl-2 pr-10 rounded-[10px] transition-all ease-in-out;
+  focus:border-blue-500 outline-none py-2 pl-2 pr-10 rounded-[10px] transition-all ease-in-out;
 
-  &.input-alert--invalid {
+  &.is-invalid {
     @apply bg-[url('assets/img/icons/invalid.svg')] border border-solid border-flame-500 hover:border-flame-300
-    focus:border-flame-300 bg-error-icon-pos bg-no-repeat bg-error-icon-size transition-all ease-in-out;
+    focus:border-flame-300 bg-error-icon-pos bg-no-repeat bg-error-icon-size transition-colors ease-in-out;
   }
 }
 
