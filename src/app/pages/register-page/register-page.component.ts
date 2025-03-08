@@ -10,8 +10,8 @@ import { LoadingComponent } from '../../components/loading/loading.component';
 import { ApiClient, ApiException, RegisterRequest } from '../../../api/api-client';
 import { Router, RouterLink } from '@angular/router';
 import { errorMessages } from '../../data/error-messages.data';
-import { InputComponent } from '../../components/error-input/input.component';
-import { AuthErrorAlertComponent } from '../../components/error-alert/auth-error-alert.component';
+import { InputComponent } from '../../components/input/input.component';
+import { AlertComponent } from '../../components/alert/alert.component';
 import { NgIf } from '@angular/common';
 
 @Component({
@@ -23,7 +23,7 @@ import { NgIf } from '@angular/common';
     ReactiveFormsModule,
     RouterLink,
     InputComponent,
-    AuthErrorAlertComponent,
+    AlertComponent,
     NgIf
   ],
   templateUrl: './register-page.component.html'

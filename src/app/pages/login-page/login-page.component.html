@@ -27,7 +27,7 @@
                          type="email"
                          placeholder="Email">
                   <ng-container *ngIf="error() as apiException">
-                    <app-error-alert [exception]="apiException"/>
+                    <app-alert [exception]="apiException"/>
                   </ng-container>
                   <button [disabled]="sendCodeForm.controls.email.invalid || loading"
                           class="primary-button">
@@ -64,7 +64,7 @@
                          class="primary-input"
                          placeholder="Code">
                   <ng-container *ngIf="error() as apiException">
-                    <app-error-alert [exception]="apiException"/>
+                    <app-alert [exception]="apiException"/>
                   </ng-container>
                   <button [disabled]="confirmCodeForm.invalid || confirmCodeForm.controls.code.value!.length < codeLength || loading"
                           class="primary-button">

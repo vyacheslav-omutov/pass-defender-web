@@ -30,7 +30,7 @@
                                [type]="'email'"
                                [placeholder]="'Email'"/>
               <ng-container *ngIf="error() as apiException">
-                <app-error-alert [exception]="apiException"/>
+                <app-alert [exception]="apiException"/>
               </ng-container>
               <button [disabled]="registerForm.invalid || loading"
                       class="primary-button">

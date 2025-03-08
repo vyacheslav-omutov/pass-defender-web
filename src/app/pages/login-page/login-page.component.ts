@@ -12,7 +12,7 @@ import { LoadingComponent } from '../../components/loading/loading.component';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { matErrorOutline, matArrowBack } from "@ng-icons/material-icons/baseline";
 import { NgIf } from '@angular/common';
-import { AuthErrorAlertComponent } from '../../components/error-alert/auth-error-alert.component';
+import { AlertComponent } from '../../components/alert/alert.component';
 import { NumberRestrictDirective } from '../../directives/number-restrict.directive';
 
 @Component({
@@ -24,7 +24,7 @@ import { NumberRestrictDirective } from '../../directives/number-restrict.direct
     RouterLink,
     NgIcon,
     NgIf,
-    AuthErrorAlertComponent,
+    AlertComponent,
     NumberRestrictDirective
   ],
   templateUrl: './login-page.component.html',

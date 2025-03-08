@@ -10,7 +10,7 @@ import { ApiExceptionResponse } from '../../data/api-exception.response';
 import { HttpStatusCode } from '@angular/common/http';
 
 @Component({
-  selector: 'app-error-alert',
+  selector: 'app-alert',
   standalone: true,
   imports: [
     NgIcon
@@ -30,7 +30,7 @@ import { HttpStatusCode } from '@angular/common/http';
   viewProviders: [provideIcons({ matWarningAmber })],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AuthErrorAlertComponent {
+export class AlertComponent {
   private _messages: string[] = [];
 
   @Input()
