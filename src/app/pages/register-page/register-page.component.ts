@@ -10,7 +10,7 @@ import { LoadingComponent } from '../../components/loading/loading.component';
 import { ApiClient, ApiException, RegisterRequest } from '../../../api/api-client';
 import { Router, RouterLink } from '@angular/router';
 import { errorMessages } from '../../data/error-messages.data';
-import { ErrorInputComponent } from '../../components/error-input/error-input.component';
+import { InputComponent } from '../../components/error-input/input.component';
 import { AuthErrorAlertComponent } from '../../components/error-alert/auth-error-alert.component';
 import { NgIf } from '@angular/common';
 
@@ -22,7 +22,7 @@ import { NgIf } from '@angular/common';
     LoadingComponent,
     ReactiveFormsModule,
     RouterLink,
-    ErrorInputComponent,
+    InputComponent,
     AuthErrorAlertComponent,
     NgIf
   ],

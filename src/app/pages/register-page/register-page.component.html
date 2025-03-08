@@ -20,11 +20,11 @@
               <span class="text-gray-300 text-base text-center font-semibold">
                 Registration in PassDefender
               </span>
-              <app-error-input [formGroup]="registerForm"
+              <app-input [formGroup]="registerForm"
                                [formControl]="registerForm.controls.username"
                                [controlErrorMessages]="userErrorMessages.username"
                                [placeholder]="'Username'"/>
-              <app-error-input [formGroup]="registerForm"
+              <app-input [formGroup]="registerForm"
                                [formControl]="registerForm.controls.email"
                                [controlErrorMessages]="userErrorMessages.email"
                                [type]="'email'"

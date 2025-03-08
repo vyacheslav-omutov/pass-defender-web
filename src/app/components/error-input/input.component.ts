@@ -6,10 +6,10 @@ import {
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule
 } from '@angular/forms';
-import {NgClass, NgIf} from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-error-input',
+  selector: 'app-input',
   standalone: true,
   imports: [ReactiveFormsModule, NgClass, NgIf],
   template: `
@@ -34,12 +34,12 @@ import {NgClass, NgIf} from '@angular/common';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ErrorInputComponent),
+      useExisting: forwardRef(() => InputComponent),
       multi: true
     }
   ]
 })
-export class ErrorInputComponent implements ControlValueAccessor {
+export class InputComponent implements ControlValueAccessor {
   @Input() type: string = "text";
   @Input() placeholder: string = '';
   @Input() formGroup!: FormGroup;
