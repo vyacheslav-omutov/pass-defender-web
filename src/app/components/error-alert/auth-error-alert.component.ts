@@ -18,9 +18,9 @@ import { HttpStatusCode } from '@angular/common/http';
   template: `
     <div class="flex flex-col gap-3">
       @for (message of messages; track $index) {
-        <div class="flex flex-row gap-2 text-red-700 text-sm p-2 bg-red-200 border border-red-700 rounded-[10px]">
+        <div class="flex flex-row gap-2 text-carnation-100 text-sm p-2 bg-carnation-300 bg-opacity-10 border border-carnation-300 rounded-[10px]">
           <div class="flex h-full">
-            <ng-icon name="matWarningAmber" class="text-xl"></ng-icon>
+            <ng-icon name="matWarningAmber" class="text-xl text-carnation-400"></ng-icon>
           </div>
           <span>{{ message }}</span>
         </div>

@@ -1,19 +1,19 @@
 <div class="w-full h-full relative">
   <div class="flex justify-center w-full h-full">
-    <div class="bg-midnight-950 w-full h-full top-0 left-0 fixed">
+    <div class="bg-black-pearl-950 w-full h-full top-0 left-0 fixed">
       <svg class="w-full h-full px-2" viewBox="0 0 2000 1000" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <path d="M1998 500C1998 223.85 1774.14 0 1498 0L998 0L998 250L250 250C111.92 250 0 361.92 0 500C0 638.07 111.92 750 250 750L998 750L998 1000L1498 1000C1774.14 1000 1998 776.14 1998 500ZM998 748L998 252L250 252C113.03 252 2 363.03 2 500C2 636.96 113.03 748 250 748L998 748ZM1000 750L1000 998L1498 998C1773.04 998 1996 775.03 1996 500C1996 224.96 1773.04 2 1498 2L1000 2L1000 750Z" fill="#172B45" fill-opacity="1.000000" fill-rule="evenodd"/>
+        <path class="fill-black-pearl-700" d="M1998 500C1998 223.85 1774.14 0 1498 0L998 0L998 250L250 250C111.92 250 0 361.92 0 500C0 638.07 111.92 750 250 750L998 750L998 1000L1498 1000C1774.14 1000 1998 776.14 1998 500ZM998 748L998 252L250 252C113.03 252 2 363.03 2 500C2 636.96 113.03 748 250 748L998 748ZM1000 750L1000 998L1498 998C1773.04 998 1996 775.03 1996 500C1996 224.96 1773.04 2 1498 2L1000 2L1000 750Z" fill-opacity="1.000000" fill-rule="evenodd"/>
       </svg>
     </div>
     <div class="w-full h-full fixed">
       <div class="h-full w-full sm:flex sm:justify-center sm:items-center">
-        <div class="sm:w-[360px] sm:max-w-[720px] w-full max-w-full max-sm:h-full">
-          <div class="max-sm:h-full bg-midnight-900 p-7 rounded-[10px]">
+        <div class="relative sm:w-[360px] sm:max-w-[720px] w-full max-w-full max-sm:h-full">
+          <div class="max-sm:h-full bg-black-pearl-700 p-7 rounded-[10px]">
             <form [formGroup]="registerForm"
                   (ngSubmit)="register()"
                   class="flex flex-col gap-3">
               <div class="flex justify-center">
-                <div class="sm:w-3/4 w-[200px] p-2">
+                <div class="sm:w-3/4 w-[200px] p-4">
                   <img alt="logo" src="assets/img/icons/logo.svg"/>
                 </div>
               </div>
@@ -47,9 +47,9 @@
               </span>
             </div>
           </div>
-          <div class="sm:flex hidden justify-center p-2">
-            <span class="text-gray-300 text-base text-center font-semibold">
-              You hav account? <a [routerLink]="'/login'" class="cursor-pointer hover:text-[#0055CC] text-[#006AFF] hover:underline">Log in</a>
+          <div class="absolute w-full sm:flex hidden p-4">
+            <span class="mx-auto text-gray-300 text-base text-center font-semibold">
+              You hav account? <a [routerLink]="'/login'" class="cursor-pointer hover:text-blue-ribbon-800 text-blue-ribbon-700 hover:underline">Log in</a>
             </span>
           </div>
         </div>

@@ -23,7 +23,7 @@ import {NgClass, NgIf} from '@angular/common';
            [ngClass]="formControl.invalid && formControl.dirty ? 'is-invalid' : ''"
            class="primary-input">
     @if (formControl.invalid && formControl.dirty) {
-      <ul class="flex flex-col gap-1 text-flame-500 text-sm py-1">
+      <ul class="flex flex-col gap-1 text-carnation-400 text-sm py-1">
         @for (error of controlErrorMessages; track $index) {
           <li *ngIf="formControl.hasError(error.type)">
             {{ error.message }}
