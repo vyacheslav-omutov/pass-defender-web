@@ -1,6 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { PreviousRouteService } from './services/previous-route.service';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +7,5 @@ import { PreviousRouteService } from './services/previous-route.service';
   imports: [RouterOutlet],
   template: `<router-outlet></router-outlet>`
 })
-export class AppComponent implements OnInit {
-  previousRouteService = inject(PreviousRouteService);
-
-  ngOnInit() {
-    this.previousRouteService.initialize();
-  }
+export class AppComponent {
 }

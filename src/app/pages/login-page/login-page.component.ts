@@ -1,11 +1,11 @@
-import {Component, inject, signal} from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import {
   ApiClient,
   ApiException,
   LoginEmailConfirmRequest,
   LoginEmailRequest
 } from '../../../api/api-client';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthorizationService } from '../../services/authorization.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoadingComponent } from '../../components/loading/loading.component';
@@ -14,7 +14,6 @@ import { matErrorOutline, matArrowBack } from "@ng-icons/material-icons/baseline
 import { NgIf } from '@angular/common';
 import { AuthErrorAlertComponent } from '../../components/error-alert/auth-error-alert.component';
 import { NumberRestrictDirective } from '../../directives/number-restrict.directive';
-import { PreviousRouteService } from '../../services/previous-route.service';
 
 @Component({
   selector: 'app-login-page',
@@ -31,17 +30,18 @@ import { PreviousRouteService } from '../../services/previous-route.service';
   templateUrl: './login-page.component.html',
   viewProviders: [provideIcons({ matErrorOutline, matArrowBack })]
 })
-export class LoginPageComponent {
+export class LoginPageComponent implements OnInit {
   steps: "sendCode" | "confirmCode" = "sendCode";
   loading = false;
   codeLength = 6;
+  redirectUrl = "";
 
   error = signal<ApiException | null>(null);
 
   apiClient = inject(ApiClient);
   router = inject(Router);
   authService = inject(AuthorizationService);
-  previousRouteService = inject(PreviousRouteService);
+  route = inject(ActivatedRoute);
 
   sendCodeForm = new FormGroup({
     email: new FormControl<string>("", [
@@ -58,6 +58,20 @@ export class LoginPageComponent {
       Validators.maxLength(6)
     ])
   })
+
+  ngOnInit() {
+    try {
+      let url = this.route.snapshot.queryParams["redirectUrl"];
+      if (url) {
+        this.redirectUrl = decodeURI(url);
+      }
+    }
+    catch (e) {
+      if (e instanceof URIError) {
+        console.log(e.message);
+      }
+    }
+  }
 
   backToSendCode(){
     this.confirmCodeForm.reset();
@@ -101,8 +115,7 @@ export class LoginPageComponent {
       .subscribe({
         next: result => {
           this.authService.setNewPayLoad(result);
-          let url = this.previousRouteService.getPreviousUrl();
-          this.router.navigateByUrl(url).then();
+          this.router.navigateByUrl(this.redirectUrl);
         },
         error: (err) => {
           this.error.set(err);

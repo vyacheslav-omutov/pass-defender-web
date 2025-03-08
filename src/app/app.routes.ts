@@ -11,7 +11,7 @@ export const routes: Routes = [
     component: MainLayoutComponent,
     children: [
       {
-        path: '',
+        path: 'manager',
         component: ManagerLayoutComponent,
         canActivate: [authorizeGuard]
       }
@@ -24,5 +24,13 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginPageComponent
+  },
+  {
+    path: '*',
+    redirectTo: '/'
+  },
+  {
+    path: '**',
+    redirectTo: '/'
   }
 ];
